@@ -1,41 +1,144 @@
 
-// Sets the number of stars we wish to display
-const numStars = 100;
+$(function () {
 
-// For every star we want to display
-
-for (let i = 0; i < numStars; i++) {
-  let star = document.createElement("div");  
-  star.className = "star";
-  var xy = getRandomPosition();
-    star.style.top = xy[0] + 'px';
-    star.style.left = xy[1] + 'px';
-  document.body.append(star);
-}
-
-// Gets random x, y values based on the size of the container
-
-function getRandomPosition() {  
-  var y = window.innerWidth;
-  var x = window.innerHeight;
-    var randomX = Math.floor(Math.random()*x);
-    var randomY = Math.floor(Math.random()*y);
-    return [randomX,randomY];
-}
-
-// ---------------------- JQery Code for Play Button timer and showing up ------------------ //
-
-$(function() {
-
-    var showPlay = function () {
-
-        $(document).ready(function(){
-            document.getElementById("play").style.display = "block"
-            document.getElementById("text").style.display = "inline";
-        });
-    }
-
-        setTimeout(showPlay, 55000);
+  //saving dom objects to variables
+  var container = $('#container');
+  var player = $('#player');
+  var pole = $('.pole');
+  var pole_1 = $('#pole_1');
+  var pole_2 = $('#pole_2');
+  var score = $('#score');
+  var speed_span = $('#speed');
+  var restart_btn = $('#restart_btn');
+      
   
+
+
+  //saving some initial setup
+  var container_width = parseInt(container.width());
+  var container_height = parseInt(container.height());
+  var pole_initial_position = parseInt(pole.css('right'));
+  var pole_initial_height = parseInt(pole.css('height'));
+  var player_left = parseInt(player.css('left'));
+  var player_height = parseInt(player.height());
+  var speed = 10;
+  
+  
+
+  //some other declarations
+  var go_up = false;
+  var score_updated = false;
+  var game_over = false;
+
+   
+
+  var the_game = setInterval(function () {
+
+      if (collision(player, pole_1) || collision(player, pole_2) || parseInt(player.css('top')) <= 0 || parseInt(player.css('top')) > container_height - player_height) {
+
+          stop_the_game();
+
+      } else {
+
+          var pole_current_position = parseInt(pole.css('right'));
+
+          //update the score when the poles have passed the bird successfully
+          if (pole_current_position > container_width - player_left) {
+              if (score_updated === false) {
+                  score.text(parseInt(score.text()) + 1);
+                  score_updated = true;
+              }
+          }
+
+          //check whether the poles went out of the container
+          if (pole_current_position > container_width) {
+              var new_height = parseInt(Math.random() * 100);
+
+              //change the pole's height
+              pole_1.css('height', pole_initial_height + new_height);
+              pole_2.css('height', pole_initial_height - new_height);
+
+              //increase speed
+              speed = speed + .75;
+              speed_span.text(speed);
+
+              score_updated = false;
+
+              pole_current_position = pole_initial_position;
+          }
+
+          //move the poles
+          pole.css('right', pole_current_position + speed);
+
+          if (go_up === false) {
+              go_down();
+          }
+      }
+
+  }, 40);
+
+  $(document).on('keydown', function (e) {
+      var key = e.keyCode;
+      if (key === 32 && go_up === false && game_over === false) {
+          go_up = setInterval(up, 50);
+      }
+  });
+
+  $(document).on('keyup', function (e) {
+      var key = e.keyCode;
+      if (key === 32) {
+          clearInterval(go_up);
+          go_up = false;
+      }
+  });
+
+
+  function go_down() {
+      player.css('top', parseInt(player.css('top')) + 5);
+  }
+
+  function up() {
+      player.css('top', parseInt(player.css('top')) - 10);
+  }
+
+  function stop_the_game() {
+      clearInterval(the_game);
+      game_over = true;
+      restart_btn.slideDown();
+  }
+
+  restart_btn.click(function () {
+      location.reload();
+      
+  }); 
+
+  // Auto Plays Music After DOM load and Click of game area 
+  
+  $(document).ready(function() {
+    container.click(function () {
+        $('#music')[0].play();
+    })
+  });  
+
+  function collision($div1, $div2) {
+      var x1 = $div1.offset().left;
+      var y1 = $div1.offset().top;
+      var h1 = $div1.outerHeight(true);
+      var w1 = $div1.outerWidth(true);
+      var b1 = y1 + h1;
+      var r1 = x1 + w1;
+      var x2 = $div2.offset().left;
+      var y2 = $div2.offset().top;
+      var h2 = $div2.outerHeight(true);
+      var w2 = $div2.outerWidth(true);
+      var b2 = y2 + h2;
+      var r2 = x2 + w2;
+
+      if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+      return true;
+  }
+
+console.log(music);
+
 });
 

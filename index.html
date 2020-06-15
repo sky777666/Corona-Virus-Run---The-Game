@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello!</title>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Corona Virus Run !   </title>
+    <link href="style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    
-  </head>  
-  <body>
-    
-    
-    
-<section class= "star-wars">
+</head>
+<body>
+  <h1> Corona Virus Run </h1> <h4>(Press SpaceBar to Move)</h4>
+  <div id="score_div">
+    <p><b>Score: </b><span id="score">0</span></p>
+         
+    <audio id="music" controls autoplay loop>
+        <source src="/Users/lukemyers/Desktop/SEI526/units/Project1/P1CVrun/CoronaVirus-Run-the-Game/testGame/Disturbed - Down with the Sickness my-free-mp3s.com.mp3" type="audio/mp3">
+    </audio> 
 
-  <div class="crawl">
-    
-    <div class="title">
-      <h2>Episode I</h1>
-      <h2>Corona Virus Run</h1>
-      <h4 id="text">  Press the ( SPACE BAR ) to move. ( CLICK MOUSE ) 1x on Game screen to play music. </h4>
+    <p><b>Speed: </b><span id="speed">10</span></p>
     </div>
-    <div class="fade"></div>
-    <p>The year was 2020 and turmoil has engulfed the globe. As Luke Myers finishes studying to become a master in his trade a global pandemic spreads across the earth. </p>     
-    <p> Created as the Evil Empire’s ultimate weapon, the Corona Virus, a germ with enough power to destroy an entire planet is now spreading across the globe.</p>
-    <p>Now it is up to you to avoid becoming down with the sickness. Pursued by the Empire’s sinister agents and waves of virus stricken air, you must race home to deliver plans that can save the world and restore freedom and health to the people of earth…</p>
-  
-  </div>
 
-</section>
-    
+    <div id="container">
+        <div id="player"></div>
+        <div id="pole_1" class="pole"></div>
+        <div id="pole_2" class="pole"></div>
+    </div>
+    <button id="restart_btn">Restart</button>
 
-<a id="play" href="/Users/lukemyers/Desktop/SEI526/units/Project1/P1CVrun/CoronaVirus-Run-the-Game/testGame/index.html"><img src="https://i.imgur.com/NFKWtmj.jpg"/></a>
+      
 
-
-<script src="script.js" defer></script>
-
+    <script src="script.js"></script>
 
 </body>
+
 </html>

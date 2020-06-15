@@ -1,88 +1,104 @@
-
- body{
-     background-color: #B6D7C3;
- }
- 
- h1, h4 {
-     text-align: center;
-     color: green;
-     font-family: 'Metal Mania', cursive;
- }
-
-#container {
-    position: absolute;
-    height: 500px;
-    width: 90%;     
-    border: 2px solid red;
-    background-color: aliceblue;
-    margin-left: 4%;
+body {
+    /* Force the body to fill the entire screen */
+    width: 100%;
+    height: 100%;
+    /* Hide elements that flow outside the viewable space */
     overflow: hidden;
-    background-image: url("https://media.blendernation.com/wp-content/uploads/2016/10/rafal-urbanski-shot-08.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-}
-
-#player {
-    position: absolute;
-    background: url("https://i.imgur.com/ekbDyla.jpg");
-    height: 45px;
-    width: 65px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    top: 20%;
-    left: 15%;
-}
-
-.pole {
-    position: absolute;
-    height: 170px;
-    width: 80px;
-    background-image:url("https://i.imgur.com/cPOHWdm.jpg");
-    background-size: contain;
-    right: -50px;
-}
-
-#pole_1 {
-    top: 0;
-}
-
-#pole_2 {
-    bottom: 0;
-}
-
-#score_div {
+    /* Black background for the screen */
+    background: #000;
+  }
+  
+  
+  .star-wars {
+    /* Flexbox to center the entire element on the screen */
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
-    font-size: 40px;
-    color: black;
-    align-items: flex-end;
-}
-
-#restart_btn {
+    justify-content: center;
+    /* This is a magic number based on the context in which this snippet is used and effects the perspective */
+    height: 800px;
+    /* This sets allows us to transform the text on a 3D plane, and is somewhat a magic number */
+    perspective: 400px;
+    /* The rest is totally up to personal styling preferences */
+    color: #feda4a;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 500%;
+    font-weight: 600;
+    letter-spacing: 6px;
+    line-height: 150%;
+    text-align: justify;
+  }
+  
+  .crawl {
+    /* Position the element so we can adjust the top property in the animation */
+    position: relative;
+    /* Making sure the text is fully off the screen at the start and end of the animation */
+    top: -100px;
+    /* Defines the skew origin at the very center when we apply transforms on the animation */
+    transform-origin: 50% 100%;
+    /* Adds the crawl animation, which plays for one minute */
+    animation: crawl 59s linear;
+  }
+  
+  
+  /* We're calling this animation "crawl" */
+  @keyframes crawl {
+    0% {
+      /* The element starts below the screen */
+      top: 0;
+      /* Rotate the text 20 degrees but keep it close to the viewer */
+      transform: rotateX(20deg) translateZ(0);
+    }
+    100% { 
+      /* This is a magic number, but using a big one to make sure the text is fully off the screen at the end */
+      top: -5350px;
+      /* Slightly increasing the rotation at the end and moving the text far away from the viewer */
+      transform: rotateX(25deg) translateZ(-2500px);
+    }
+  }
+  
+  
+  .fade {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    top: -25px;
+    background-image: linear-gradient(0deg, transparent, black 75%);
+    z-index: 1;
+  }
+  
+  .star {
     position: absolute;
-    top: 60%;
-    left: 10%;
-    width: 80%;
-    padding: 20px;
-    background-color: green;
-    color: white;
-    font-size: 35px;
-    border: none;
-    cursor: pointer;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+  }
+  
+#play {
+    height: 150px;
+    width: 150px;
+    position: fixed;
+    left: 45%;
+    top:75%;
+    background-size: cover;
     display: none;
+}  
+
+#play:hover {
+  opacity: 40%;
 }
 
-#restart_btn:hover {
-opacity: 80%;
-color: blue;
-
+ .title {
+  font-family: 'Metal Mania', cursive;
+  color: #1EDE00;
+  margin: 0;
+  text-align: center;
 }
 
 
-#start {
-    background-color: blue;
+
+#text {
+  font-size:23px;
+  color: yellow;
+  position: flex;
+  justify-content: center;
+  display:none;
 }
